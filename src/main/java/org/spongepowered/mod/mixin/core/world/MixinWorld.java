@@ -44,5 +44,4 @@ public abstract class MixinWorld implements org.spongepowered.api.world.World, I
     private void onUpdateWeatherBody(CallbackInfo ci) {
         this.setWeatherStartTime(this.worldInfo.getWorldTotalTime());
     }
-
 }
