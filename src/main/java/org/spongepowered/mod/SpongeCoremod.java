@@ -98,6 +98,9 @@ public class SpongeCoremod implements IFMLLoadingPlugin {
         // Transformer exclusions
         Launch.classLoader.addTransformerExclusion("ninja.leaping.configurate.");
         Launch.classLoader.addTransformerExclusion("org.apache.commons.lang3.");
+        Launch.classLoader.addTransformerExclusion("org.spongepowered.common.transformer.");
+
+        Launch.classLoader.registerTransformer("org.spongepowered.common.transformer.SpongeAISuperclassTransformer");
     }
 
     @Override
