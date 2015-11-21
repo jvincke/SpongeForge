@@ -51,6 +51,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import org.objectweb.asm.Type;
+import org.slf4j.Logger;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Event;
 import org.spongepowered.api.plugin.Plugin;
@@ -63,9 +64,9 @@ import org.spongepowered.api.service.sql.SqlService;
 import org.spongepowered.api.service.world.ChunkLoadService;
 import org.spongepowered.api.util.Tristate;
 import org.spongepowered.api.util.command.CommandMapping;
-import org.spongepowered.common.SpongeImpl;
 import org.spongepowered.common.SpongeBootstrap;
 import org.spongepowered.common.SpongeGame;
+import org.spongepowered.common.SpongeImpl;
 import org.spongepowered.common.command.MinecraftCommandWrapper;
 import org.spongepowered.common.data.SpongeSerializationRegistry;
 import org.spongepowered.common.interfaces.IMixinServerCommandManager;
@@ -86,6 +87,7 @@ import org.spongepowered.mod.service.world.SpongeChunkLoadService;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 public class SpongeMod extends DummyModContainer implements PluginContainer {
 
@@ -265,8 +267,13 @@ public class SpongeMod extends DummyModContainer implements PluginContainer {
     }
 
     @Override
-    public Object getInstance() {
-        return getMod();
+    public Logger getLogger() {
+        return SpongeImpl.getSlf4jLogger();
+    }
+
+    @Override
+    public Optional<Object> getInstance() {
+        return Optional.of(this);
     }
 
     private static ModMetadata createMetadata(Map<String, Object> defaults) {
